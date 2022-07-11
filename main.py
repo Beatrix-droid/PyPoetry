@@ -17,16 +17,19 @@ def scrape_page(word):
     scrapes the content of that page."""
 
 
-    html_text = requests.get(f"https://rhymer.com/{word}.html").text
-    soup = BeautifulSoup(html_text, "lxml")
-    rhymes = soup.find_all("section")
+    html_text = requests.get(BASE_URL + f"{word}.html").text
+    soup = BeautifulSoup(html_text, "html.parser")
+    words = soup.find_all("a", class_= "btn c")
+
+  #  return words[0].text
 
 
     rhyming_words = []
 
-    for index, rhyme in enumerate(rhymes):
-        rhyme = rhyme.find("div")
-        last_chars = word[-2:]
+    for i in range(len(words) - 1):
+        rhyme = words[i]
+        rhyme = rhyme.text
+        #last_chars = word[-2:]
 
         #rhyme = re.split(last_chars, rhyme)
         #rhyme = rhyme + last_chars
