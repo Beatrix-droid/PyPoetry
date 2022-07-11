@@ -1,6 +1,5 @@
-from doctest import script_from_examples
+
 import requests
-import re
 from bs4 import BeautifulSoup
 
 
