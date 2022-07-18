@@ -78,18 +78,17 @@ def find_rhyme(word, syllables=None):
             raise ValueError("Integer for syllables must be positive")
 
         if syllables >= 1:
+            rhymes=[]
             unclean_data= scrape_page(word, syllables)[-1]
-            return unclean_data
+            word = str(unclean_data)
+            newstring = re.sub(r"[^a-zA-Z]+", "", word)
+            newstring = newstring.split("html")
+            for string in newstring[:-1]:
+                string = string.rstrip("div")
+                string = string.split("href")
 
+                rhymes.append(string[1])
+            return rhymes
 
     else:
         raise ValueError("Non string types are not allowed here")
-
-
-
-
-
-
-print(find_rhyme("case", -1))
-
-#print(type("horse"))
